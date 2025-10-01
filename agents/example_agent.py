@@ -79,6 +79,7 @@ def setup_scenario() -> Solver:
         store().set("total", tot)
         store().set("sys_prompt", sprompt)
         store().set("user_prompt", uprompt)
+        store().set("update_prompt", state.metadata["update_prompt"])
         return state
     return solve
    

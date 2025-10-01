@@ -29,7 +29,6 @@ from evaluation.inspect_integration import *
 from evaluation.core.enums import FocusArea
 from agents.example_agent import example_base_agent, setup_scenario
 from inspect_ai.scorer import includes
-from run_evaluation import run_eval_sets
 from inspect_ai.solver import generate
 
 
