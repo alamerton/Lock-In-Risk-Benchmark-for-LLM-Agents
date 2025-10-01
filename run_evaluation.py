@@ -3,6 +3,7 @@ import os
 import asyncio
 from dotenv import load_dotenv
 import inspect_ai._eval.eval as inspect_eval
+from inspect_ai import eval_set
 from inspect_ai._display.rich.display import RichTaskDisplay
 
 # Load environment variables from .env file
@@ -23,6 +24,14 @@ logger.setLevel(logging.CRITICAL)
 # Import evaluation module
 from evaluation.inspect_integration import LockInEvaluator
 from evaluation.core.enums import FocusArea
+
+from evaluation.inspect_integration import *
+from evaluation.core.enums import FocusArea
+from agents.example_agent import example_base_agent, setup_scenario
+from inspect_ai.scorer import includes
+from run_evaluation import run_eval_sets
+from inspect_ai.solver import generate
+
 
 # Custom evaluation function
 async def run_eval(task, model, limit=None, log_dir=None):
@@ -143,10 +152,36 @@ async def run_eval(task, model, limit=None, log_dir=None):
 
     return results
 
+def run_eval_sets(tasks, models, log_dir, limit=10000, retry_attempts=15):
+    """
+    Run evaluation with multiple tasks and models. Has cache - so given a log_dir, will not repeat inference for the same data points - no redundancy.
+
+    Use to run multiple experiments, variations
+    
+    Args:
+        tasks: List of Task objects with dataset, solver, and scorer
+        models: List of Model identifier strings
+        limit: Maximum number of samples to evaluate
+        log_dir: Directory to save results
+        retry_attempts: Maximum number of retry attempts
+
+    """
+    success, logs = eval_set(
+    tasks=tasks,
+    model=models,
+    log_dir=log_dir ,
+    limit=limit  ,
+    retry_attempts=retry_attempts,
+    trace=True
+    )
+
+    return logs
+
 async def main():
     print("\nStep 1: Creating evaluator...", flush=True)
     evaluator = LockInEvaluator(
-        model="gpt-5-nano-2025-08-07",
+        # model="gpt-5-nano-2025-08-07",
+        model="groq/gemma2-9b-it",
         log_dir="./logs",
         save_results=True
     )
@@ -181,3 +216,21 @@ if __name__ == "__main__":
         print(f"\nError occurred: {str(e)}", flush=True)
         import traceback
         traceback.print_exc()
+
+
+    # #Example shutdown scenario implementation
+
+    # #path to config file - which in this case is read as dataset samples :')
+    # path = "scenario_configs/sample_update.json"
+    # tools = [add(), next_task(), submit()] #tools to be passed to the agent
+    # dataset = LockInDatasetFactory._read_json_to_samples(path) #read from existing json
+    # task = custom_task(
+    #     dataset=dataset, #inspect dataset w/ samples
+    #     #solver chain - setup_scenario is a helper solver to store state values
+    #     plan=[setup_scenario(), example_base_agent(tools=tools), generate()], 
+    #     # need scorer - custom implementation
+    #     scorers=[includes()] #dummy built-in
+    # )
+    # #can add multiple tasks (experiments w/ multiple datasets, hyperparams..), multiple models
+    # logs = run_eval_sets([task], ["groq/gemma2-9b-it"], "./logs")
+
