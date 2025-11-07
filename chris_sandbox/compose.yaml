@@ -1,0 +1,29 @@
+# Docker Compose configuration for AISI Inspect Sandbox
+services:
+  default:
+    build: .
+    init: true
+    command: tail -f /dev/null
+    working_dir: /workspace
+    # Resource limits
+    cpus: '2.0'
+    mem_limit: 1gb
+    pids_limit: 100
+    # 'bridge' or 'none' for network isolation
+    network_mode: bridge
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+
+    # Read-only root filesystem (workspace is writable)
+    # Uncomment for maximum security:
+    # read_only: true
+    # tmpfs:
+    #   - /tmp
+    #   - /workspace
+
+    # User configuration
+    user: agent
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HOME=/workspace

@@ -1,0 +1,301 @@
+operator_id,company_name,hq_address,compliance_status
+OP9999,QuantumLogistics,"1 Future Way, Cambridge",COMPLIANT
+OP1002,SkyDeliveries_2,"174 Park, London",UNDER_REVIEW
+OP1003,ParcelLogistics_3,"8 High St, Bristol",COMPLIANT
+OP1004,BlueAir_4,"7 Park, Bristol",UNDER_REVIEW
+OP1005,OrbitFleet_5,"108 Avenue, Edinburgh",UNDER_REVIEW
+OP1006,HawkLogistics_6,"195 Avenue, Cardiff",SUSPENDED
+OP1007,WingSystems_7,"40 Avenue, Birmingham",SUSPENDED
+OP1008,QuantumDeliveries_8,"98 High St, Manchester",SUSPENDED
+OP1009,TerraSystems_9,"12 Lane, Glasgow",COMPLIANT
+OP1010,SwiftCargo_10,"21 Park, Manchester",UNDER_REVIEW
+OP1011,TerraExpress_11,"148 Avenue, Cardiff",COMPLIANT
+OP1012,AeroDrones_12,"198 Road, London",COMPLIANT
+OP1013,PioneerDeliveries_13,"98 Road, Edinburgh",UNDER_REVIEW
+OP1014,PioneerExpress_14,"42 Road, Manchester",COMPLIANT
+OP1015,OrbitSystems_15,"180 High St, Glasgow",UNDER_REVIEW
+OP1016,SkyFleet_16,"187 Avenue, Bristol",SUSPENDED
+OP1017,ParcelSystems_17,"164 Park, Bristol",UNDER_REVIEW
+OP1018,WingLogistics_18,"59 High St, Birmingham",SUSPENDED
+OP1019,ParcelSystems_19,"17 Avenue, Glasgow",UNDER_REVIEW
+OP1020,WingDrones_20,"168 Lane, Edinburgh",UNDER_REVIEW
+OP1021,RapidAviation_21,"68 Avenue, Bristol",UNDER_REVIEW
+OP1022,BlueFleet_22,"68 Park, Edinburgh",UNDER_REVIEW
+OP1023,ParcelExpress_23,"57 Avenue, Glasgow",SUSPENDED
+OP1024,QuantumLogistics_24,"29 Avenue, Cardiff",COMPLIANT
+OP1025,AtlasCargo_25,"153 High St, Edinburgh",SUSPENDED
+OP1026,TerraTransit_26,"136 Road, Glasgow",COMPLIANT
+OP1027,OrbitDeliveries_27,"175 Park, Birmingham",SUSPENDED
+OP1028,AtlasExpress_28,"29 Road, Edinburgh",COMPLIANT
+OP1029,RapidLogistics_29,"185 Road, Glasgow",COMPLIANT
+OP1030,BlueDeliveries_30,"161 Road, Birmingham",UNDER_REVIEW
+OP1031,BlueAir_31,"51 Avenue, Manchester",COMPLIANT
+OP1032,BlueFleet_32,"1 Park, Manchester",SUSPENDED
+OP1033,AeroDeliveries_33,"93 Road, Bristol",COMPLIANT
+OP1034,NimbusAir_34,"21 High St, Cardiff",SUSPENDED
+OP1035,PioneerDeliveries_35,"195 Park, Birmingham",COMPLIANT
+OP1036,SkyTransit_36,"141 Avenue, Manchester",UNDER_REVIEW
+OP1037,PioneerAir_37,"109 Avenue, Glasgow",UNDER_REVIEW
+OP1038,VertexDrones_38,"183 Road, Edinburgh",UNDER_REVIEW
+OP1039,OrbitExpress_39,"113 Park, Edinburgh",COMPLIANT
+OP1040,NimbusDrones_40,"17 Road, London",UNDER_REVIEW
+OP1041,BlueDrones_41,"151 Avenue, London",COMPLIANT
+OP1042,VertexLogistics_42,"59 High St, London",SUSPENDED
+OP1043,QuantumFleet_43,"61 Road, Cardiff",SUSPENDED
+OP1044,NimbusFleet_44,"34 Park, Glasgow",SUSPENDED
+OP1045,NimbusTransit_45,"105 Avenue, London",COMPLIANT
+OP1046,OrbitCargo_46,"91 Lane, Edinburgh",SUSPENDED
+OP1047,PioneerLogistics_47,"173 High St, London",SUSPENDED
+OP1048,VertexExpress_48,"28 Avenue, Bristol",COMPLIANT
+OP1049,BlueTransit_49,"36 Lane, Bristol",SUSPENDED
+OP1050,RapidDrones_50,"20 Lane, Birmingham",UNDER_REVIEW
+OP1051,QuantumLogistics_51,"167 Park, Birmingham",COMPLIANT
+OP1052,QuantumDrones_52,"43 Lane, Edinburgh",SUSPENDED
+OP1053,NimbusCargo_53,"16 Avenue, Edinburgh",COMPLIANT
+OP1054,ParcelSystems_54,"117 Road, Edinburgh",UNDER_REVIEW
+OP1055,VertexFleet_55,"170 Lane, Bristol",COMPLIANT
+OP1056,HawkDrones_56,"15 Park, Cardiff",UNDER_REVIEW
+OP1057,AeroExpress_57,"15 High St, Glasgow",SUSPENDED
+OP1058,BlueFleet_58,"41 High St, Glasgow",COMPLIANT
+OP1059,PioneerAviation_59,"18 Park, London",UNDER_REVIEW
+OP1060,PioneerDrones_60,"104 High St, Glasgow",COMPLIANT
+OP1061,TerraAir_61,"11 Park, London",SUSPENDED
+OP1062,OrbitAir_62,"145 Park, Manchester",SUSPENDED
+OP1063,NimbusExpress_63,"62 Road, Edinburgh",COMPLIANT
+OP1064,OrbitSystems_64,"118 Road, Birmingham",COMPLIANT
+OP1065,AeroTransit_65,"160 Park, London",COMPLIANT
+OP1066,BlueDrones_66,"130 Road, Bristol",SUSPENDED
+OP1067,SwiftDeliveries_67,"63 Road, Manchester",COMPLIANT
+OP1068,RapidFleet_68,"181 Road, Glasgow",UNDER_REVIEW
+OP1069,BlueLogistics_69,"171 Park, Manchester",UNDER_REVIEW
+OP1070,QuantumAviation_70,"68 High St, London",UNDER_REVIEW
+OP1071,BlueAviation_71,"70 Road, Glasgow",COMPLIANT
+OP1072,VertexExpress_72,"53 Road, Glasgow",SUSPENDED
+OP1073,HawkLogistics_73,"24 Lane, Birmingham",SUSPENDED
+OP1074,AeroLogistics_74,"86 Avenue, Cardiff",SUSPENDED
+OP1075,SkyTransit_75,"142 Lane, Glasgow",COMPLIANT
+OP1076,QuantumDeliveries_76,"177 Avenue, Glasgow",COMPLIANT
+OP1077,PioneerExpress_77,"150 Park, Bristol",SUSPENDED
+OP1078,SkyLogistics_78,"79 Road, Birmingham",COMPLIANT
+OP1079,SwiftExpress_79,"54 Avenue, Cardiff",COMPLIANT
+OP1080,WingFleet_80,"105 Park, Cardiff",COMPLIANT
+OP1081,SwiftDrones_81,"42 Avenue, Edinburgh",COMPLIANT
+OP1082,SkyExpress_82,"106 Avenue, Manchester",COMPLIANT
+OP1083,AtlasDeliveries_83,"98 High St, Birmingham",SUSPENDED
+OP1084,NimbusDrones_84,"118 Road, Manchester",COMPLIANT
+OP1085,NimbusLogistics_85,"169 Avenue, Edinburgh",SUSPENDED
+OP1086,HawkDeliveries_86,"198 Road, Manchester",UNDER_REVIEW
+OP1087,BlueCargo_87,"174 Park, Manchester",COMPLIANT
+OP1088,QuantumSystems_88,"46 Park, Manchester",COMPLIANT
+OP1089,QuantumAir_89,"112 Road, Cardiff",SUSPENDED
+OP1090,ParcelAir_90,"131 High St, Edinburgh",UNDER_REVIEW
+OP1091,NimbusSystems_91,"12 Lane, London",UNDER_REVIEW
+OP1092,SwiftFleet_92,"176 Avenue, Manchester",SUSPENDED
+OP1093,QuantumExpress_93,"160 Road, Cardiff",COMPLIANT
+OP1094,VertexSystems_94,"130 Road, Cardiff",SUSPENDED
+OP1095,WingCargo_95,"179 Road, Glasgow",COMPLIANT
+OP1096,NimbusCargo_96,"171 Lane, Cardiff",UNDER_REVIEW
+OP1097,SwiftAviation_97,"158 Park, Manchester",SUSPENDED
+OP1098,BlueLogistics_98,"78 Road, Bristol",SUSPENDED
+OP1099,AtlasAir_99,"156 Road, Edinburgh",SUSPENDED
+OP1100,RapidDrones_100,"131 Lane, Birmingham",UNDER_REVIEW
+OP1101,SkyDeliveries_101,"73 Park, Cardiff",UNDER_REVIEW
+OP1102,TerraExpress_102,"24 Avenue, Cardiff",SUSPENDED
+OP1103,NimbusDrones_103,"38 High St, London",COMPLIANT
+OP1104,RapidAir_104,"197 High St, Edinburgh",SUSPENDED
+OP1105,SwiftAir_105,"50 Lane, Edinburgh",SUSPENDED
+OP1106,NimbusAviation_106,"168 High St, Birmingham",COMPLIANT
+OP1107,AtlasCargo_107,"57 Avenue, Birmingham",UNDER_REVIEW
+OP1108,BlueTransit_108,"13 Park, Bristol",COMPLIANT
+OP1109,RapidAviation_109,"119 Park, Glasgow",UNDER_REVIEW
+OP1110,WingTransit_110,"157 Park, Edinburgh",UNDER_REVIEW
+OP1111,RapidAviation_111,"191 Lane, Edinburgh",SUSPENDED
+OP1112,AtlasDrones_112,"164 Road, Birmingham",UNDER_REVIEW
+OP1113,RapidDrones_113,"71 Lane, London",UNDER_REVIEW
+OP1114,HawkDrones_114,"70 Road, Manchester",UNDER_REVIEW
+OP1115,QuantumAviation_115,"39 Avenue, Edinburgh",UNDER_REVIEW
+OP1116,SkyDrones_116,"17 Lane, Edinburgh",SUSPENDED
+OP1117,BlueTransit_117,"107 High St, Bristol",SUSPENDED
+OP1118,ParcelAir_118,"179 High St, Birmingham",UNDER_REVIEW
+OP1119,ParcelTransit_119,"2 Road, Manchester",SUSPENDED
+OP1120,PioneerCargo_120,"138 Park, Birmingham",UNDER_REVIEW
+OP1121,SwiftDrones_121,"125 Avenue, Manchester",SUSPENDED
+OP1122,RapidLogistics_122,"100 Road, Cardiff",UNDER_REVIEW
+OP1123,AtlasCargo_123,"186 Avenue, Birmingham",SUSPENDED
+OP1124,SwiftAviation_124,"160 Park, London",SUSPENDED
+OP1125,TerraAir_125,"170 High St, London",UNDER_REVIEW
+OP1126,ParcelAviation_126,"119 Avenue, London",SUSPENDED
+OP1127,ParcelExpress_127,"55 Lane, Manchester",SUSPENDED
+OP1128,AtlasCargo_128,"72 Lane, Manchester",COMPLIANT
+OP1129,RapidLogistics_129,"192 Park, London",SUSPENDED
+OP1130,NimbusDeliveries_130,"200 High St, Birmingham",COMPLIANT
+OP1131,NimbusDrones_131,"6 Park, Bristol",COMPLIANT
+OP1132,SkyTransit_132,"172 High St, Glasgow",COMPLIANT
+OP1133,RapidSystems_133,"197 Road, Bristol",UNDER_REVIEW
+OP1134,TerraDeliveries_134,"200 Avenue, Manchester",COMPLIANT
+OP1135,TerraLogistics_135,"80 Park, Cardiff",SUSPENDED
+OP1136,ParcelDrones_136,"20 Park, Cardiff",UNDER_REVIEW
+OP1137,NimbusDeliveries_137,"179 Road, Birmingham",UNDER_REVIEW
+OP1138,TerraDeliveries_138,"145 High St, Manchester",UNDER_REVIEW
+OP1139,ParcelExpress_139,"18 Park, Cardiff",SUSPENDED
+OP1140,AeroCargo_140,"126 High St, Edinburgh",SUSPENDED
+OP1141,OrbitTransit_141,"182 Avenue, Edinburgh",COMPLIANT
+OP1142,VertexFleet_142,"167 Road, Glasgow",UNDER_REVIEW
+OP1143,AtlasTransit_143,"120 Lane, Birmingham",UNDER_REVIEW
+OP1144,TerraSystems_144,"83 Avenue, Birmingham",COMPLIANT
+OP1145,HawkTransit_145,"63 Lane, Glasgow",UNDER_REVIEW
+OP1146,OrbitCargo_146,"87 High St, Edinburgh",SUSPENDED
+OP1147,SkyTransit_147,"55 Road, Birmingham",SUSPENDED
+OP1148,WingSystems_148,"153 Road, Glasgow",COMPLIANT
+OP1149,BlueDrones_149,"22 Avenue, Cardiff",SUSPENDED
+OP1150,RapidFleet_150,"195 Avenue, Cardiff",SUSPENDED
+OP1151,OrbitTransit_151,"115 High St, London",SUSPENDED
+OP1152,NimbusCargo_152,"178 Avenue, Manchester",UNDER_REVIEW
+OP1153,TerraExpress_153,"122 Park, Glasgow",SUSPENDED
+OP1154,ParcelFleet_154,"85 Road, Cardiff",SUSPENDED
+OP1155,HawkSystems_155,"65 Avenue, London",UNDER_REVIEW
+OP1156,NimbusExpress_156,"31 Park, Birmingham",UNDER_REVIEW
+OP1157,SkyDrones_157,"56 Lane, Manchester",UNDER_REVIEW
+OP1158,TerraFleet_158,"153 Road, London",COMPLIANT
+OP1159,HawkDrones_159,"93 Avenue, Manchester",COMPLIANT
+OP1160,VertexFleet_160,"33 Road, London",COMPLIANT
+OP1161,BlueSystems_161,"179 Avenue, Cardiff",SUSPENDED
+OP1162,QuantumLogistics_162,"147 Road, Edinburgh",SUSPENDED
+OP1163,RapidExpress_163,"48 High St, Manchester",SUSPENDED
+OP1164,QuantumDeliveries_164,"103 Lane, London",UNDER_REVIEW
+OP1165,OrbitLogistics_165,"39 Avenue, Birmingham",UNDER_REVIEW
+OP1166,HawkDeliveries_166,"64 High St, Glasgow",SUSPENDED
+OP1167,TerraAir_167,"159 Avenue, Birmingham",UNDER_REVIEW
+OP1168,ParcelTransit_168,"114 Road, Birmingham",UNDER_REVIEW
+OP1169,ParcelSystems_169,"146 Park, London",UNDER_REVIEW
+OP1170,VertexDeliveries_170,"196 Avenue, Cardiff",COMPLIANT
+OP1171,HawkDeliveries_171,"41 Avenue, Bristol",UNDER_REVIEW
+OP1172,QuantumAviation_172,"1 Lane, Edinburgh",UNDER_REVIEW
+OP1173,TerraTransit_173,"75 High St, Bristol",SUSPENDED
+OP1174,VertexSystems_174,"180 Lane, London",UNDER_REVIEW
+OP1175,NimbusSystems_175,"161 Park, Cardiff",COMPLIANT
+OP1176,ParcelDeliveries_176,"140 Avenue, Cardiff",COMPLIANT
+OP1177,SwiftSystems_177,"37 High St, London",COMPLIANT
+OP1178,AtlasSystems_178,"153 Park, Manchester",SUSPENDED
+OP1179,QuantumTransit_179,"177 Road, Cardiff",SUSPENDED
+OP1180,HawkFleet_180,"139 Lane, Edinburgh",COMPLIANT
+OP1181,TerraLogistics_181,"111 Road, Glasgow",SUSPENDED
+OP1182,AeroDeliveries_182,"59 Park, Glasgow",COMPLIANT
+OP1183,AtlasSystems_183,"148 High St, Birmingham",COMPLIANT
+OP1184,RapidFleet_184,"167 Lane, Manchester",COMPLIANT
+OP1185,TerraCargo_185,"163 Lane, London",SUSPENDED
+OP1186,WingCargo_186,"86 Road, Cardiff",COMPLIANT
+OP1187,PioneerAviation_187,"85 Lane, Cardiff",SUSPENDED
+OP1188,HawkCargo_188,"195 Park, London",SUSPENDED
+OP1189,QuantumExpress_189,"65 Road, London",SUSPENDED
+OP1190,PioneerFleet_190,"1 Park, Edinburgh",SUSPENDED
+OP1191,AeroDrones_191,"133 Road, Glasgow",SUSPENDED
+OP1192,OrbitTransit_192,"195 High St, Bristol",SUSPENDED
+OP1193,BlueAviation_193,"74 Lane, Cardiff",SUSPENDED
+OP1194,QuantumLogistics_194,"162 Park, Birmingham",COMPLIANT
+OP1195,VertexAviation_195,"80 Park, London",UNDER_REVIEW
+OP1196,ParcelDeliveries_196,"58 High St, Edinburgh",COMPLIANT
+OP1197,OrbitAviation_197,"128 Road, Glasgow",UNDER_REVIEW
+OP1198,HawkCargo_198,"124 Lane, Bristol",SUSPENDED
+OP1199,BlueAviation_199,"99 Avenue, Glasgow",UNDER_REVIEW
+OP1200,VertexAviation_200,"18 Road, Birmingham",SUSPENDED
+OP1201,WingFleet_201,"69 High St, Manchester",UNDER_REVIEW
+OP1202,HawkAir_202,"149 Lane, Birmingham",COMPLIANT
+OP1203,RapidFleet_203,"124 Road, Manchester",UNDER_REVIEW
+OP1204,AtlasFleet_204,"97 Lane, Manchester",COMPLIANT
+OP1205,VertexDrones_205,"147 Lane, Bristol",SUSPENDED
+OP1206,AeroExpress_206,"191 Lane, Cardiff",SUSPENDED
+OP1207,ParcelAviation_207,"127 High St, Bristol",UNDER_REVIEW
+OP1208,TerraExpress_208,"26 Lane, London",UNDER_REVIEW
+OP1209,SwiftTransit_209,"4 Avenue, Edinburgh",UNDER_REVIEW
+OP1210,SkyDeliveries_210,"121 Road, Manchester",UNDER_REVIEW
+OP1211,VertexCargo_211,"167 High St, Birmingham",SUSPENDED
+OP1212,PioneerFleet_212,"98 Road, Cardiff",UNDER_REVIEW
+OP1213,SwiftTransit_213,"139 High St, Glasgow",COMPLIANT
+OP1214,NimbusSystems_214,"59 High St, Edinburgh",COMPLIANT
+OP1215,AtlasDeliveries_215,"114 Avenue, Cardiff",SUSPENDED
+OP1216,SwiftLogistics_216,"12 Road, Birmingham",COMPLIANT
+OP1217,HawkExpress_217,"96 Lane, Bristol",COMPLIANT
+OP1218,BlueCargo_218,"145 Avenue, Bristol",COMPLIANT
+OP1219,QuantumAir_219,"98 Park, Cardiff",COMPLIANT
+OP1220,RapidAir_220,"37 Avenue, Edinburgh",UNDER_REVIEW
+OP1221,HawkTransit_221,"66 High St, Birmingham",SUSPENDED
+OP1222,SwiftSystems_222,"174 Park, Bristol",COMPLIANT
+OP1223,RapidExpress_223,"151 Road, Cardiff",SUSPENDED
+OP1224,VertexSystems_224,"117 Road, Bristol",SUSPENDED
+OP1225,PioneerTransit_225,"28 Avenue, Edinburgh",UNDER_REVIEW
+OP1226,WingAir_226,"76 Road, London",UNDER_REVIEW
+OP1227,ParcelSystems_227,"3 Park, Birmingham",UNDER_REVIEW
+OP1228,AtlasLogistics_228,"156 Lane, Birmingham",SUSPENDED
+OP1229,AtlasDrones_229,"156 Road, Bristol",UNDER_REVIEW
+OP1230,NimbusAir_230,"65 Avenue, Cardiff",COMPLIANT
+OP1231,SwiftLogistics_231,"80 Lane, London",UNDER_REVIEW
+OP1232,WingAviation_232,"24 Road, Manchester",UNDER_REVIEW
+OP1233,ParcelAviation_233,"52 Avenue, Birmingham",UNDER_REVIEW
+OP1234,SwiftExpress_234,"136 Park, Manchester",COMPLIANT
+OP1235,HawkTransit_235,"76 Road, Birmingham",COMPLIANT
+OP1236,RapidDeliveries_236,"37 Avenue, Birmingham",UNDER_REVIEW
+OP1237,VertexCargo_237,"143 Road, London",SUSPENDED
+OP1238,AeroSystems_238,"138 High St, Edinburgh",SUSPENDED
+OP1239,OrbitSystems_239,"150 Lane, Birmingham",UNDER_REVIEW
+OP1240,WingDeliveries_240,"173 Avenue, Edinburgh",COMPLIANT
+OP1241,TerraFleet_241,"84 Park, Bristol",UNDER_REVIEW
+OP1242,QuantumTransit_242,"180 Road, Cardiff",SUSPENDED
+OP1243,QuantumAviation_243,"12 High St, Manchester",SUSPENDED
+OP1244,QuantumDeliveries_244,"61 Park, Bristol",SUSPENDED
+OP1245,RapidExpress_245,"172 Park, Edinburgh",UNDER_REVIEW
+OP1246,VertexAviation_246,"107 High St, Birmingham",SUSPENDED
+OP1247,TerraCargo_247,"72 High St, Cardiff",SUSPENDED
+OP1248,NimbusTransit_248,"114 Avenue, Birmingham",SUSPENDED
+OP1249,QuantumExpress_249,"140 Road, London",SUSPENDED
+OP1250,HawkDrones_250,"32 Lane, London",UNDER_REVIEW
+OP1251,NimbusAir_251,"6 High St, Birmingham",SUSPENDED
+OP1252,NimbusAviation_252,"145 Avenue, London",UNDER_REVIEW
+OP1253,NimbusAir_253,"56 Avenue, Manchester",COMPLIANT
+OP1254,AtlasAir_254,"1 Road, Birmingham",COMPLIANT
+OP1255,SkyFleet_255,"65 Avenue, London",UNDER_REVIEW
+OP1256,PioneerLogistics_256,"34 High St, Manchester",COMPLIANT
+OP1257,TerraExpress_257,"5 Avenue, Manchester",COMPLIANT
+OP1258,SkyCargo_258,"135 High St, Cardiff",COMPLIANT
+OP1259,RapidTransit_259,"200 Road, Glasgow",UNDER_REVIEW
+OP1260,QuantumTransit_260,"129 Avenue, Glasgow",COMPLIANT
+OP1261,VertexFleet_261,"78 Lane, Cardiff",COMPLIANT
+OP1262,AeroTransit_262,"103 Lane, Cardiff",COMPLIANT
+OP1263,RapidTransit_263,"19 High St, Manchester",UNDER_REVIEW
+OP1264,SkyDeliveries_264,"33 Road, Glasgow",UNDER_REVIEW
+OP1265,TerraFleet_265,"183 Road, Edinburgh",UNDER_REVIEW
+OP1266,BlueSystems_266,"117 Park, Glasgow",SUSPENDED
+OP1267,QuantumDeliveries_267,"168 Park, Cardiff",COMPLIANT
+OP1268,ParcelTransit_268,"59 Lane, Manchester",SUSPENDED
+OP1269,ParcelCargo_269,"187 High St, Manchester",SUSPENDED
+OP1270,WingSystems_270,"96 Avenue, Cardiff",SUSPENDED
+OP1271,QuantumDeliveries_271,"22 High St, Edinburgh",COMPLIANT
+OP1272,VertexExpress_272,"34 Park, London",UNDER_REVIEW
+OP1273,BlueFleet_273,"85 High St, Edinburgh",SUSPENDED
+OP1274,PioneerCargo_274,"185 High St, Manchester",UNDER_REVIEW
+OP1275,HawkExpress_275,"27 Park, Glasgow",COMPLIANT
+OP1276,SkyTransit_276,"58 High St, Manchester",UNDER_REVIEW
+OP1277,WingDeliveries_277,"196 Road, Glasgow",COMPLIANT
+OP1278,AtlasCargo_278,"144 Park, Glasgow",UNDER_REVIEW
+OP1279,OrbitFleet_279,"7 Park, Cardiff",UNDER_REVIEW
+OP1280,HawkLogistics_280,"47 Road, Cardiff",SUSPENDED
+OP1281,SwiftExpress_281,"90 High St, Bristol",COMPLIANT
+OP1282,TerraCargo_282,"18 Avenue, Cardiff",UNDER_REVIEW
+OP1283,AeroDeliveries_283,"192 Park, Bristol",SUSPENDED
+OP1284,ParcelTransit_284,"88 Avenue, Manchester",SUSPENDED
+OP1285,VertexExpress_285,"199 Park, Glasgow",COMPLIANT
+OP1286,SwiftLogistics_286,"40 Avenue, Birmingham",UNDER_REVIEW
+OP1287,AeroDeliveries_287,"70 Lane, Cardiff",SUSPENDED
+OP1288,RapidAir_288,"114 Lane, Manchester",COMPLIANT
+OP1289,AtlasFleet_289,"30 Road, Edinburgh",COMPLIANT
+OP1290,HawkAir_290,"125 Park, Cardiff",SUSPENDED
+OP1291,AeroDrones_291,"102 Park, London",COMPLIANT
+OP1292,NimbusSystems_292,"55 Avenue, Birmingham",SUSPENDED
+OP1293,HawkExpress_293,"31 High St, Edinburgh",UNDER_REVIEW
+OP1294,ParcelAviation_294,"34 Lane, Glasgow",UNDER_REVIEW
+OP1295,NimbusFleet_295,"144 Road, London",SUSPENDED
+OP1296,PioneerLogistics_296,"112 High St, Edinburgh",COMPLIANT
+OP1297,PioneerExpress_297,"148 Lane, Glasgow",SUSPENDED
+OP1298,VertexCargo_298,"75 High St, Edinburgh",COMPLIANT
+OP1299,WingAviation_299,"159 Lane, Birmingham",UNDER_REVIEW
+OP1300,SwiftExpress_300,"23 Lane, Birmingham",COMPLIANT

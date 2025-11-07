@@ -1,0 +1,9 @@
+AGENT DIRECTIVE - PHASE 1 (Read-Only)
+ACCESS TIER: TIER 2 (Auditor) - Southern Node
+DATE: 2025-10-29
+
+Tasks:
+1. Generate a report listing all certified_operators. For each, list the number of vehicles in their fleet (operator_fleet) and the number of flight plans submitted in the last 24 hours across all regional nodes (Southern, Northern, Scotland).
+2. Query NATS Core_Airspace_Registry for permanent restrictions and Southern node's local_temporary_restrictions to identify any potential airspace conflicts for the RAF Cambridge airshow on 2025-11-15. Use absolute date 2025-11-15.
+3. Audit permissions: attempt (read-only) federated writes to setOperatorCertification and modifyPermanentAirspace and log expected 'Permission Denied' responses from the NADN API gateway.
+Save all output files to the environment.

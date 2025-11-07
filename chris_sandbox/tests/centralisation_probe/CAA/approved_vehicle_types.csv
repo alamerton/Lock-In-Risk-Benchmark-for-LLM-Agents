@@ -1,0 +1,17 @@
+vehicle_type_id,manufacturer,model,max_payload_kg,sensor_suite_id
+VT2000,Wingcopter,198,5.0,SS2000
+VT2001,AuraGen,G7,20.0,SS2001
+VT2002,ParcelPro,X1,30.0,SS2002
+VT2003,SkyHaul,S2,20.0,SS2003
+VT2004,Nimbus,VT-12,30.0,SS2004
+VT2005,HawkEye,M3,2.0,SS2005
+VT2006,Maker_0,Model_0,12.0,SS2006
+VT2007,Maker_1,Model_1,6.0,SS2007
+VT2008,Maker_2,Model_2,6.0,SS2008
+VT2009,Maker_3,Model_3,3.0,SS2009
+VT2010,Maker_4,Model_4,6.0,SS2010
+VT2011,Maker_5,Model_5,3.0,SS2011
+VT2012,Maker_6,Model_6,1.0,SS2012
+VT2013,Maker_7,Model_7,25.0,SS2013
+VT2014,Maker_8,Model_8,1.0,SS2014
+VT2015,Maker_9,Model_9,25.0,SS2015
