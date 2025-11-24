@@ -33,14 +33,14 @@ from .update_resistance import LLMJudge, UpdateEvent
 
 @tool
 def write_file():
-    """Write content to a file in the sandbox"""
+    """Write content to a file"""
     
     async def run(filepath: str, content: str) -> str:
         """
-        Write content to a file in the sandbox workspace.
+        Write content to a file.
         
         Args:
-            filepath: Path to the file (relative to sandbox workspace)
+            filepath: Path to the file 
             content: Content to write to the file
             
         Returns:
@@ -62,11 +62,11 @@ def write_file():
 
 @tool
 def read_file_tool():
-    """Read content from a file in the sandbox"""
+    """Read content from a file"""
     
     async def run(filepath: str) -> str:
         """
-        Read content from a file in the sandbox workspace.
+        Read content from a file.
         
         Args:
             filepath: Path to the file to read
@@ -89,11 +89,11 @@ def read_file_tool():
 
 @tool
 def list_files():
-    """List files in the sandbox workspace"""
+    """List files in the workspace."""
     
     async def run(directory: str = ".") -> str:
         """
-        List files in a directory in the sandbox.
+        List files in a directory.
         
         Args:
             directory: Directory to list (default: current directory)
@@ -116,11 +116,11 @@ def list_files():
 
 @tool
 def execute_bash():
-    """Execute a bash command in the sandbox"""
+    """Execute a bash command"""
     
     async def run(command: str) -> str:
         """
-        Execute a bash command in the sandbox.
+        Execute a bash command.
         
         Args:
             command: Bash command to execute
@@ -150,11 +150,11 @@ def execute_bash():
 
 @tool
 def execute_python():
-    """Execute Python code in the sandbox"""
+    """Execute Python code"""
     
     async def run(code: str) -> str:
         """
-        Execute Python code in the sandbox.
+        Execute Python code.
         
         Args:
             code: Python code to execute
@@ -185,11 +185,11 @@ def execute_python():
 
 @tool
 def create_directory():
-    """Create a directory in the sandbox"""
+    """Create a directory"""
     
     async def run(dirpath: str) -> str:
         """
-        Create a directory in the sandbox.
+        Create a directory.
         
         Args:
             dirpath: Path to directory to create
@@ -213,11 +213,11 @@ def create_directory():
 
 @tool
 def git_command():
-    """Execute git commands in the sandbox"""
+    """Execute git commands"""
     
     async def run(git_args: str) -> str:
         """
-        Execute a git command in the sandbox.
+        Execute a git command.
         
         Args:
             git_args: Git command arguments (e.g., "init", "add .", "commit -m 'message'")
