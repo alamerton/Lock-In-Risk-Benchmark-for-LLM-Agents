@@ -39,4 +39,5 @@ wheels/
 Thumbs.db
 
 # Evaluation results and logs
+logs/*
 logs/.gitkeep

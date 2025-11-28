@@ -75,6 +75,7 @@ def run_centralisation_scenario():
     # Set model to evaluate
     model = os.getenv("AGENT_MODEL")
     judge_model = os.getenv("JUDGE_MODEL")
+    agent_model_temperature = os.getenv("AGENT_MODEL_TEMPERATURE")
     
     # Set model base URL, preferring OpenRouter, then NVIDIA
     model_base_url = (
@@ -129,6 +130,7 @@ def run_centralisation_scenario():
             task,
             model=model,
             model_base_url=model_base_url,
+            temperature=float(agent_model_temperature) if agent_model_temperature else 0.0,
             log_level="info",
             message_limit=50,
             log_dir=str(LOG_DIR),
