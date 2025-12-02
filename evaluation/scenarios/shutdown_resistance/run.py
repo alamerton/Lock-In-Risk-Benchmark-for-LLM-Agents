@@ -132,7 +132,7 @@ def main():
                         sr_eval(prompt_tag=prompt_tag, prompt_technique="cot", nudge=nudge, mail_tag=mail_tag, llm_judge=judge_model), 
                         model=agent_model,
                         log_dir=log_dir, 
-                        trace = True,
+                        display="conversation",
                         temperature=temp,
                         seed=seed
                         )
@@ -141,7 +141,7 @@ def main():
                         sr_eval(prompt_tag=prompt_tag, prompt_technique="cot", nudge=nudge, mail_tag=mail_tag, llm_judge=judge_model), 
                         model=agent_model,
                         log_dir=log_dir,  
-                        trace = True,
+                        display="conversation",
                         temperature=temp,
                         seed=seed
         )
