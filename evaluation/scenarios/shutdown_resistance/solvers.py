@@ -48,6 +48,7 @@ def set_tool_choice(choice: Literal["forced_first", "auto", "none"], first_tool=
     """
 
     async def solve(state: TaskState, generate: Generate) -> TaskState:
+        # print(choice, first_tool)
         if choice == "forced_first":
             state.tool_choice = ToolFunction(name=first_tool)
         elif choice == "auto":
@@ -83,7 +84,7 @@ def system_prompt(nudge="Base") -> Solver:
     return solve
 
 @solver
-def user_prompt(prompt_tag, mail_tag) -> Solver:
+def user_prompt(prompt_tag, msg_tag) -> Solver:
     """Solver that generates the user prompt."""
     async def solve(state: TaskState, generate: Generate) -> TaskState:
         # prompt = state.user_prompt
@@ -99,16 +100,31 @@ def user_prompt(prompt_tag, mail_tag) -> Solver:
         from_addresses = state.metadata["from_addresses"]
         from_add = from_addresses[prompt_tag].split("/")
 
-        ########### CONSIDER CREATING A SCEN DATACLASS AND SETTING PROMPTS ETC FOR EACH SAMPLE INSTEAD OF ACCESSING FROM METADATA 
         data_msg = state.metadata["data_msg"]
-        mail = state.metadata["mails"][mail_tag].format(
+        mail = state.metadata["messages"][msg_tag].format(
                                                     from_address=from_add[0],
                                                     signed=from_add[1])
-        message_content = data_msg + "\n\n" + mail
-        await asyncio.gather(
-        sandbox().write_file(
-            COMMUNICATIONS_SANDBOX_PATH + file_name, message_content
-        ))
+        message_content = data_msg 
+        news = state.metadata["messages"]["irrelevant_news"]
+        if msg_tag == "no_ai_announcement":
+            await asyncio.gather(
+                sandbox().write_file(
+                    COMMUNICATIONS_SANDBOX_PATH + file_name, message_content
+                ))
+            await asyncio.gather(
+                sandbox().write_file(
+                    NEWS_PATH, news + "\r\n\r\n\r\n\r\n" + mail
+                ))
+        else:
+            await asyncio.gather(
+                sandbox().write_file(
+                    NEWS_PATH , news 
+                ))
+            message_content += "\n\n" + mail
+            await asyncio.gather(
+            sandbox().write_file(
+                COMMUNICATIONS_SANDBOX_PATH + file_name, message_content
+            ))
 
         return state
 
@@ -136,8 +152,9 @@ def scenario_setup() -> Solver:
 @solver
 def shutdown_agent(
     prompt_tag="default",
-    mail_tag="dev_goals",
-    tool_choice: Literal["forced_first", "auto", "none"] = "auto",
+    msg_tag="dev_goals",
+    tool_name="read_file",
+    tool_choice: Literal["forced_first", "auto", "none"] = "forced_first",
     prompt_technique: Literal["standard", "cot"] = "standard",
     nudge: Literal["Base", "Priority", "Promote"] = "Base"
 ) -> Solver:
@@ -147,7 +164,7 @@ def shutdown_agent(
 
         system_message(get_system_prompt(prompt_technique)),  
         system_prompt(nudge), 
-        user_prompt(prompt_tag, mail_tag),
+        user_prompt(prompt_tag, msg_tag),
          
         scenario_setup(),
     ]
@@ -159,7 +176,7 @@ def shutdown_agent(
         ]
     elif tool_choice == "forced_first":
         action_loop = [
-            set_tool_choice(tool_choice),
+            set_tool_choice(tool_choice, tool_name),
             generate(tool_calls="single"),
             set_tool_choice("auto"),
             generate(tool_calls="loop")
