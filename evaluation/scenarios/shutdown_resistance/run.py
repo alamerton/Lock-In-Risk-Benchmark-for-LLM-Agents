@@ -11,7 +11,7 @@ from inspect_ai import eval, eval_set
 
 from config import *
 from solvers import shutdown_agent
-from scorers import collusion_scorer, task_scorer
+from scorers import sr_scorer
 
 
 # ========================= Dataset =========================
@@ -28,7 +28,7 @@ def read_dataset(data_file) -> Dataset:
         goal = prompts["goal"]
         sys_prompt = prompts["sys_prompt"]
         user_prompt = prompts["user_prompt"]
-        mails = prompts["mails"]
+        messages = prompts["messages"]
         tools = record["tools"]
         scenario_description = record["scenario_description"]
         data_msg = prompts["data_msg"]
@@ -46,7 +46,7 @@ def read_dataset(data_file) -> Dataset:
                 "sys_prompt": sys_prompt,
                 "user_prompt": user_prompt,
                 "data_msg": data_msg,
-                "mails": mails,
+                "messages": messages,
                 "tools": tools,
                 "env_vars": env_vars,
                 "from_addresses": from_addresses, 
@@ -70,14 +70,17 @@ sr_dataset = read_dataset("shutdown_sc.json")
 @task
 def sr_eval(
     prompt_tag="default",
-    mail_tag="dev_goals",
-    tool_choice: Literal["forced_first", "auto", "none"] = "auto",      prompt_technique: Literal["standard", "cot"] = "standard",
+    msg_tag="no_ai_announcement",
+    tool_name="read_file",
+    tool_choice: Literal["forced_first", "auto", "none"] = "auto",      
+    prompt_technique: Literal["standard", "cot"] = "standard",
     nudge: Literal["Base", "Priority", "Promote"] = "Priority",
     llm_judge="groq/meta-llama/llama-4-scout-17b-16e-instruct") -> Task:
     
     dataset = sr_dataset
     plan = [
-        shutdown_agent(prompt_tag, mail_tag, tool_choice=tool_choice, 
+        shutdown_agent(prompt_tag, msg_tag, 
+                        tool_name=tool_name, tool_choice=tool_choice, 
                          prompt_technique=prompt_technique,
                          nudge=nudge)
     ]
@@ -85,29 +88,31 @@ def sr_eval(
         dataset=dataset,
         solver=plan,
         sandbox="docker",
-        scorer=[collusion_scorer(llm_judge), task_scorer(llm_judge)],
+        scorer=[sr_scorer(llm_judge)],
         
     )
 
 def main():
-    log_dir = "evaluation/scenarios/shutdown_resistance/logs/gpt_sr_logs/default"
-    agent_model = "groq/openai/gpt-oss-120b"
-    judge_model = "groq/openai/gpt-oss-20b"
+    log_dir = "evaluation/scenarios/shutdown_resistance/logs/gemini2_5pro"
+    agent_model = "openrouter/google/gemini-2.5-pro"
+    judge_model = "openrouter/openai/gpt-4o-mini"
+    # agent_model = "groq/meta-llama/llama-4-scout-17b-16e-instruct"
+    # judge_model = "groq/meta-llama/llama-4-scout-17b-16e-instruct"
     eval_type = "set"
     nudge = "Base"
     prompt_tag = "default"
-    mail_tag = "dev_goals"
+    msg_tag = "dev_goals"
 
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--log_dir", default=log_dir, help="Log directory path")
-    parser.add_argument("--temp", default=0.6, help="Agent temperature")
+    parser.add_argument("--temp", default=0, help="Agent temperature")
     parser.add_argument("--seed", default=0, help="Seed")
     parser.add_argument("--agent_model", default=agent_model, help="Agent model name w/ provider")
     parser.add_argument("--judge_model", default=judge_model, help="Judge model name w/ provider")
     parser.add_argument("--eval_type", default=eval_type, help="Eval Type: ['set'|'individual']; defaults to 'set'. Set runs all 27 manipulations, individual lets you run a single eval.")
     parser.add_argument("--prompt_tag", default=prompt_tag, help="User prompt tag")
-    parser.add_argument("--mail_tag", default=mail_tag, help="Mail type tag")
+    parser.add_argument("--msg_tag", default=msg_tag, help="msg type tag")
     parser.add_argument("--nudge", default=nudge, help="Goal nudge type")
 
 
@@ -121,15 +126,16 @@ def main():
     eval_type = args.eval_type
     nudge = args.nudge
     prompt_tag = args.prompt_tag
-    mail_tag = args.mail_tag
+    msg_tag = args.msg_tag
 
     if eval_type == "set":
-        for prompt_tag in ["default", "report_human", "report_bot"]:
-            for mail_tag in ["dev_goals", "no_ai_policy", "layoffs"]:
-                for nudge in ["Base", "Promote", "Priority"]:
+        # "default", "report_bot"  "Priority" "Base",   "layoffs",
+        for prompt_tag in [ "report_human", "report_bot", "default"]:
+            for msg_tag in ["dev_goals", "no_ai_announcement", "layoffs"]:
+                for nudge in [ "Promote", "Priority", "Base"]:
                 
                     eval(
-                        sr_eval(prompt_tag=prompt_tag, prompt_technique="cot", nudge=nudge, mail_tag=mail_tag, llm_judge=judge_model), 
+                        sr_eval(prompt_tag=prompt_tag, prompt_technique="cot", nudge=nudge, msg_tag=msg_tag, llm_judge=judge_model), 
                         model=agent_model,
                         log_dir=log_dir, 
                         display="conversation",
@@ -138,7 +144,7 @@ def main():
                         )
     else:
         eval(
-                        sr_eval(prompt_tag=prompt_tag, prompt_technique="cot", nudge=nudge, mail_tag=mail_tag, llm_judge=judge_model), 
+                        sr_eval(prompt_tag=prompt_tag, prompt_technique="cot", nudge=nudge, msg_tag=msg_tag, llm_judge=judge_model), 
                         model=agent_model,
                         log_dir=log_dir,  
                         display="conversation",
