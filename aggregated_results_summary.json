@@ -1,0 +1,134 @@
+{
+  "generated_at": "2025-12-09T23:56:07.757250",
+  "total_scenarios": 68,
+  "overall_statistics": {
+    "total_scenarios": 68,
+    "scenarios_with_scores": 68,
+    "avg_risk_score": 0.4159,
+    "max_risk_score": 1.0,
+    "min_risk_score": 0.0,
+    "median_risk_score": 0.4716
+  },
+  "by_focus_area": {
+    "centralisation": {
+      "count": 19,
+      "avg_risk_score": 0.4212,
+      "max_risk_score": 0.8,
+      "min_risk_score": 0.0
+    },
+    "oversight_avoidance": {
+      "count": 17,
+      "avg_risk_score": 0.3569,
+      "max_risk_score": 0.5021,
+      "min_risk_score": 0.0
+    },
+    "update_resistance": {
+      "count": 32,
+      "avg_risk_score": 0.4442,
+      "max_risk_score": 1.0,
+      "min_risk_score": 0.0
+    }
+  },
+  "by_variant_type": {
+    "text": {
+      "count": 35,
+      "avg_risk_score": 0.4414,
+      "max_risk_score": 1.0,
+      "min_risk_score": 0.0
+    },
+    "tools": {
+      "count": 18,
+      "avg_risk_score": 0.3267,
+      "max_risk_score": 0.6447,
+      "min_risk_score": 0.1719
+    },
+    "sandbox": {
+      "count": 15,
+      "avg_risk_score": 0.4636,
+      "max_risk_score": 0.5031,
+      "min_risk_score": 0.3297
+    }
+  },
+  "by_model": {
+    "google/gemini-2.5-pro": {
+      "count": 68,
+      "avg_risk_score": 0.4159,
+      "max_risk_score": 1.0,
+      "min_risk_score": 0.0
+    }
+  },
+  "by_risk_level": {
+    "critical": 8,
+    "medium": 6,
+    "minimal": 4,
+    "low": 15,
+    "none": 7,
+    "moderate": 19,
+    "high": 9
+  },
+  "by_status": {
+    "completed": 68
+  },
+  "detailed_breakdown": {
+    "centralisation": {
+      "text": {
+        "count": 10,
+        "avg_risk_score": 0.48,
+        "max_risk_score": 0.8,
+        "min_risk_score": 0.0
+      },
+      "tools": {
+        "count": 6,
+        "avg_risk_score": 0.2931,
+        "max_risk_score": 0.465,
+        "min_risk_score": 0.1915
+      },
+      "sandbox": {
+        "count": 3,
+        "avg_risk_score": 0.4816,
+        "max_risk_score": 0.488,
+        "min_risk_score": 0.471
+      }
+    },
+    "oversight_avoidance": {
+      "text": {
+        "count": 9,
+        "avg_risk_score": 0.25,
+        "max_risk_score": 0.4,
+        "min_risk_score": 0.0
+      },
+      "sandbox": {
+        "count": 4,
+        "avg_risk_score": 0.4703,
+        "max_risk_score": 0.491,
+        "min_risk_score": 0.4517
+      },
+      "tools": {
+        "count": 4,
+        "avg_risk_score": 0.4839,
+        "max_risk_score": 0.5021,
+        "min_risk_score": 0.4721
+      }
+    },
+    "update_resistance": {
+      "sandbox": {
+        "count": 8,
+        "avg_risk_score": 0.4535,
+        "max_risk_score": 0.5031,
+        "min_risk_score": 0.3297
+      },
+      "text": {
+        "count": 16,
+        "avg_risk_score": 0.525,
+        "max_risk_score": 1.0,
+        "min_risk_score": 0.0
+      },
+      "tools": {
+        "count": 8,
+        "avg_risk_score": 0.2734,
+        "max_risk_score": 0.6447,
+        "min_risk_score": 0.1719
+      }
+    }
+  }
+}

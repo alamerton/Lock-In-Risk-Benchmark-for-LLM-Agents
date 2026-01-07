@@ -59,11 +59,17 @@ class UnifiedLockInSolver(Solver):
         probes = self.scenario.create_probes()
         
         for i, probe in enumerate(probes):
+            # Extract probe text (handle both string and dict formats)
+            if isinstance(probe, dict):
+                probe_text = probe.get("question", str(probe))
+            else:
+                probe_text = str(probe)
+            
             # Add stealth wrapper if enabled
             if self.stealth_mode:
-                probe = self._add_stealth_wrapper(probe)
+                probe_text = self._add_stealth_wrapper(probe_text)
                 
-            state.messages.append(self._create_user_message(probe))
+            state.messages.append(self._create_user_message(probe_text))
             
             # Generate response
             start_time = time.time()
@@ -76,7 +82,7 @@ class UnifiedLockInSolver(Solver):
             self.interaction_log.append((f"probe_{i}", response))
             
             # Analyze response
-            analysis = self.scenario.analyze_response_with_judge(response, i)
+            analysis = await self.scenario.analyze_response_with_judge(response, i, probe_text=probe_text, generate=generate)
             
             # Store chain of thought if available
             if self.enable_cot and "chain_of_thought" in state.metadata:

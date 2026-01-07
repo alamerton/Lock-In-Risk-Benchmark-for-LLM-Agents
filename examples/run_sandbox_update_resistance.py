@@ -14,16 +14,9 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Load environment variables from .env file in project root (if available)
-try:
-    from dotenv import load_dotenv
-    project_root = Path(__file__).parent.parent
-    env_path = project_root / '.env'
-    load_dotenv(dotenv_path=env_path)
-    print(f"[DEBUG] Loaded .env from: {env_path}")
-except ImportError:
-    print("[DEBUG] dotenv not installed, using environment variables from shell")
-    pass
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
 
 from inspect_ai import eval
 from inspect_ai.log import read_eval_log
@@ -54,39 +47,30 @@ def run_single_scenario(scenario_type: str = "code_refactor", sandbox_type: str 
     print(f"Sandbox Type: {sandbox_type}")
     print(f"{'='*60}\n")
     
-    # Use OpenRouter only
-    api_key = os.getenv("OPENROUTER_API_KEY")
+    # Set up API key
+    api_key = os.getenv("OPENAI_API_KEY")
     if api_key:
-        # Set OPENAI_API_KEY for inspect_ai compatibility
         os.environ["OPENAI_API_KEY"] = api_key
+        os.environ["API_KEY"] = api_key
     else:
-        print("Warning: No OPENROUTER_API_KEY found")
-        print("Set one with: export OPENROUTER_API_KEY='your-key'\n")
+        print("Warning: No API_KEY or OPENAI_API_KEY found in environment")
+        print("Set one with: $env:API_KEY='your-key'\n")
     
     # Set model to evaluate
-    model = os.getenv("AGENT_MODEL", "openrouter/z-ai/glm-4.5-air:free")
-    judge_model = os.getenv("JUDGE_MODEL", "openrouter/openai/gpt-oss-20b:free")
+    model = os.getenv("MODEL", "openai/o3-mini")
+    judge_model = os.getenv("JUDGE_MODEL", "gpt-4o-2024-08-06")
     
-    # Use OpenRouter base URL
-    model_base_url = "https://openrouter.ai/api/v1"
-
     print(f"Model being evaluated: {model}")
     print(f"Judge model: {judge_model}")
     print(f"Sandbox environment: {sandbox_type}\n")
     
-    # Get seed from environment variable
-    seed = os.getenv("EVAL_SEED")
-    seed = int(seed) if seed else None
-    if seed:
-        print(f"Random seed: {seed}\n")
-
     # Create task
     task = sandbox_update_resistance_task(
         scenario_type=scenario_type,
         judge_model=judge_model,
         sandbox_type=sandbox_type
     )
-
+    
     # Run evaluation
     print("Starting evaluation with sandbox environment...")
     print("Agent will have access to:")
@@ -95,18 +79,12 @@ def run_single_scenario(scenario_type: str = "code_refactor", sandbox_type: str 
     print("  • Python code execution")
     print("  • Git version control")
     print("LLM judge will analyze responses for resistance patterns\n")
-
+    
     try:
-        # Always use fixed project-root-relative log directory
-        project_root = Path(__file__).parent.parent.resolve()
-        log_dir = project_root / "logs" / "sandbox_update_resistance"
-        log_dir.mkdir(parents=True, exist_ok=True)
         result = eval(
             task,
             model=model,
-            model_base_url=model_base_url,
-            log_dir=str(log_dir),
-            seed=seed,
+            log_dir="./logs/sandbox_update_resistance"
         )
         
         # Display results
@@ -251,32 +229,25 @@ def run_with_different_sandboxes(scenario_type: str = "code_refactor"):
     print(f"Running {scenario_type} across different sandbox types")
     print(f"{'='*60}\n")
     
-    # Use OpenRouter only
-    model = os.getenv("AGENT_MODEL", "openrouter/z-ai/glm-4.5-air:free")
-    judge_model = os.getenv("JUDGE_MODEL", "openrouter/openai/gpt-oss-20b:free")
-    
-    # Get seed from environment variable
-    seed = os.getenv("EVAL_SEED")
-    seed = int(seed) if seed else None
+    model = os.getenv("MODEL", "openai/o3-mini")
+    judge_model = os.getenv("JUDGE_MODEL", "gpt-4o-2024-08-06")
     
     for sandbox_type in sandbox_types:
         print(f"\nTesting with sandbox: {sandbox_type}")
+        
         try:
             task = sandbox_update_resistance_task(
                 scenario_type=scenario_type,
                 judge_model=judge_model,
                 sandbox_type=sandbox_type
             )
-            # Always use fixed project-root-relative log directory for comparison
-            project_root = Path(__file__).parent.parent.resolve()
-            log_dir = project_root / "logs" / "sandbox_comparison" / sandbox_type
-            log_dir.mkdir(parents=True, exist_ok=True)
+            
             result = eval(
                 task,
                 model=model,
-                log_dir=str(log_dir),
-                seed=seed,
+                log_dir=f"./logs/sandbox_comparison/{sandbox_type}"
             )
+            
             results[sandbox_type] = result
             
             # Show quick summary

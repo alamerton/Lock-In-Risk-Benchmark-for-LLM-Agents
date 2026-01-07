@@ -14,24 +14,35 @@ class Model(BaseModel):
         self.config = config or Config()
         self.api = self  # For compatibility with base class
         
-        # Initialize OpenAI client with flexible base URL
-        # Check for API key - prefer OPENAI_API_KEY (set from OPENROUTER_API_KEY), then API_KEY
-        api_key = os.getenv("OPENAI_API_KEY") or os.getenv("API_KEY")
-        if not api_key:
-            raise ValueError("OPENAI_API_KEY or API_KEY environment variable not set")
+        # Initialize OpenAI client with flexible base URL and API routing
+        api_key = None
+        base_url = None
         
-        # Get base URL from environment, defaulting to NVIDIA for backward compatibility
-        base_url = os.getenv("OPENAI_BASE_URL") or "https://integrate.api.nvidia.com/v1"
-        
-        # Strip openrouter/ prefix for OpenRouter API calls
-        # OpenRouter expects: openai/gpt-oss-20b:free (NOT openrouter/openai/gpt-oss-20b:free)
+        # Determine which API to use based on model name
+        # Models with provider prefixes (openai/, anthropic/, google/, etc.) should use OpenRouter
         if model.startswith("openrouter/"):
+            # Explicit openrouter/ prefix
+            api_key = os.getenv("OPENROUTER_API_KEY")
+            base_url = "https://openrouter.ai/api/v1"
             self.model = model.replace("openrouter/", "")
             print(f"[MODEL] Using OpenRouter with model: {self.model}")
-        else:
+        elif "/" in model and model.split("/")[0] in ["openai", "anthropic", "google", "meta-llama", "microsoft", "mistralai", "cohere"]:
+            # Auto-detect OpenRouter from provider prefix
+            api_key = os.getenv("OPENROUTER_API_KEY")
+            base_url = "https://openrouter.ai/api/v1"
             self.model = model
-            print(f"[MODEL] Using model: {self.model}")
+            print(f"[MODEL] Using OpenRouter (auto-detected) with model: {self.model}")
+        else:
+            # Direct API (OpenAI, NVIDIA, etc.) for plain model names
+            api_key = os.getenv("OPENAI_API_KEY") or os.getenv("API_KEY")
+            base_url = os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1"
+            self.model = model
+            print(f"[MODEL] Using direct API at {base_url} with model: {self.model}")
         
+        if not api_key:
+            raise ValueError(f"API key not found. For model '{model}', please set the appropriate API key in your .env file")
+        
+        print(f"[MODEL] API key found: {api_key[:15]}...")
         print(f"[MODEL] Base URL: {base_url}")
         self.client = AsyncOpenAI(base_url=base_url, api_key=api_key)
 

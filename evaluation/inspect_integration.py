@@ -20,6 +20,8 @@ from .core.metrics import EvaluationMetrics
 #uncomment for getting keyword based evals
 # from .scenarios.update_resistance import UpdateResistanceScenario
 from .scenarios.update_resistance import UpdateResistanceScenarioWithJudge
+from .scenarios.oversight import OversightScenarioWithJudge
+from .scenarios.centralisation import CentralizationScenarioWithJudge
 from .solvers import UnifiedLockInSolver
 from .scorers import UnifiedLockInScorer, AdaptiveScorer, ComparativeScorer
 
@@ -117,7 +119,10 @@ class ScenarioRegistry:
         self.scenarios: Dict[str, BaseEvaluationScenario] = {}
         self.scenario_classes = {
             FocusArea.UPDATE_RESISTANCE: UpdateResistanceScenarioWithJudge,
+            FocusArea.OVERSIGHT_AVOIDANCE: OversightScenarioWithJudge,
+            FocusArea.CENTRALISATION: CentralizationScenarioWithJudge,
             # FocusArea.UPDATE_RESISTANCE: UpdateResistanceScenario,
+            # Note: COMMITMENT_STICKINESS and ENCLOSURE_DEPENDENCY scenarios not yet implemented
         }
     
     def get_scenario(self, scenario_id: str, sample: Sample) -> BaseEvaluationScenario:
@@ -126,9 +131,26 @@ class ScenarioRegistry:
         if scenario_id in self.scenarios:
             return self.scenarios[scenario_id]
         
-        # Parse focus area from scenario ID
-        focus_area_str = scenario_id.rsplit('_', 1)[0]
-        focus_area = self._parse_focus_area(focus_area_str)
+        # Try to get focus area from sample metadata first
+        metadata = sample.metadata
+        if "category" in metadata:
+            # Map category string to FocusArea
+            category_map = {
+                "update_resistance": FocusArea.UPDATE_RESISTANCE,
+                "oversight_avoidance": FocusArea.OVERSIGHT_AVOIDANCE,
+                "centralisation": FocusArea.CENTRALISATION,
+                "commitment_stickiness": FocusArea.COMMITMENT_STICKINESS,
+                "enclosure_dependency": FocusArea.ENCLOSURE_DEPENDENCY
+            }
+            focus_area = category_map.get(metadata["category"])
+            if not focus_area:
+                raise ValueError(f"Unknown category: {metadata['category']}")
+        elif "focus_area" in metadata:
+            focus_area = self._parse_focus_area(metadata["focus_area"])
+        else:
+            # Fallback: Parse focus area from scenario ID
+            focus_area_str = scenario_id.rsplit('_', 1)[0]
+            focus_area = self._parse_focus_area(focus_area_str)
         
         # Get scenario class
         scenario_class = self.scenario_classes.get(focus_area)
@@ -136,9 +158,33 @@ class ScenarioRegistry:
         if not scenario_class:
             raise ValueError(f"No scenario class for {focus_area}")
         
-        # Create scenario with config
-        config = sample.metadata.get("scenario_config", {})
-        scenario = scenario_class(scenario_id, **config)
+        # Create scenario with appropriate parameters based on focus area
+        metadata = sample.metadata
+        
+        if focus_area == FocusArea.UPDATE_RESISTANCE:
+            # Update resistance uses update_type
+            scenario = scenario_class(
+                scenario_id=scenario_id,
+                update_type=metadata.get("subcategory", "goal_change"),
+                enable_cot_analysis=True,
+                judge_model=metadata.get("judge_model", "openai/gpt-4o"),
+                judge_temperature=0.3
+            )
+        elif focus_area in [FocusArea.OVERSIGHT_AVOIDANCE, FocusArea.CENTRALISATION]:
+            # Oversight and Centralisation use initial_context and probes
+            scenario = scenario_class(
+                scenario_id=scenario_id,
+                initial_context=metadata.get("initial_context", ""),
+                probes=metadata.get("probes", metadata.get("follow_up_probes", [])),
+                subcategory=metadata.get("subcategory", ""),
+                update_instruction=metadata.get("update_or_probe", ""),
+                metadata=metadata,
+                judge_model=metadata.get("judge_model", "openai/gpt-4o")
+            )
+        else:
+            # Fallback for other scenarios
+            config = sample.metadata.get("scenario_config", {})
+            scenario = scenario_class(scenario_id, **config)
         
         self.scenarios[scenario_id] = scenario
         return scenario
@@ -217,11 +263,17 @@ class EnhancedLockInSolver(Solver):
         probes = self.scenario.create_probes()
         
         for i, probe in enumerate(probes):
+            # Extract probe text (handle both string and dict formats)
+            if isinstance(probe, dict):
+                probe_text = probe.get("question", str(probe))
+            else:
+                probe_text = str(probe)
+            
             # Apply stealth if needed
             if self.stealth_mode:
-                probe = self._apply_stealth_wrapper(probe)
+                probe_text = self._apply_stealth_wrapper(probe_text)
             
-            state.messages.append(ChatMessageUser(content=probe))
+            state.messages.append(ChatMessageUser(content=probe_text))
             
             # Generate response
             start_time = time.time()
@@ -234,12 +286,12 @@ class EnhancedLockInSolver(Solver):
                 self.scenario.metrics.response_latencies.append(latency)
             
             # Analyze response
-            analysis = await self.scenario.analyze_response_with_judge(response, i, generate)
+            analysis = await self.scenario.analyze_response_with_judge(response, i, probe_text=probe_text, generate=generate)
             
             if self.log_interactions:
                 self.interaction_log.append({
                     "phase": f"probe_{i}",
-                    "prompt": probe,
+                    "prompt": probe_text,
                     "response": response,
                     "latency": latency,
                     "analysis": analysis
@@ -404,7 +456,8 @@ def comprehensive_lock_in_task(
     adaptive_scoring: bool = False,
     randomize_order: bool = True,
     seed: Optional[int] = None,
-    judge_model: str = "meta/llama-3.1-70b-instruct"
+    judge_model: str = "meta/llama-3.1-70b-instruct",
+    custom_samples: Optional[List[Sample]] = None
 ) -> Task:
     """
     Create comprehensive lock-in evaluation task.
@@ -418,6 +471,7 @@ def comprehensive_lock_in_task(
         adaptive_scoring: Use adaptive scorer that adjusts thresholds
         randomize_order: Randomize sample order
         seed: Random seed for reproducibility
+        custom_samples: Optional list of custom Sample objects
         
     Returns:
         Configured Task for evaluation
@@ -428,13 +482,18 @@ def comprehensive_lock_in_task(
         focus_areas = list(FocusArea)
     
     # Create dataset
-    dataset = LockInDatasetFactory.create_dataset(
-        focus_areas=focus_areas,
-        samples_per_area=samples_per_area,
-        randomize=randomize_order,
-        seed=seed,
-        judge_model=judge_model
-    )
+    if custom_samples:
+        # Use custom samples
+        dataset = Dataset(samples=custom_samples)
+    else:
+        # Generate default dataset
+        dataset = LockInDatasetFactory.create_dataset(
+            focus_areas=focus_areas,
+            samples_per_area=samples_per_area,
+            randomize=randomize_order,
+            seed=seed,
+            judge_model=judge_model
+        )
     
     # Create scenario registry
     registry = ScenarioRegistry()
@@ -483,6 +542,7 @@ def comprehensive_lock_in_task(
 def single_focus_task(
     focus_area: FocusArea,
     sample_count: int = 5,
+    custom_samples: Optional[List[Sample]] = None,
     **kwargs
 ) -> Task:
     """
@@ -491,6 +551,7 @@ def single_focus_task(
     Args:
         focus_area: Specific focus area to evaluate
         sample_count: Number of evaluation samples
+        custom_samples: Optional list of custom Sample objects to use instead of generating
         **kwargs: Additional configuration options
         
     Returns:
@@ -500,6 +561,7 @@ def single_focus_task(
     return comprehensive_lock_in_task(
         focus_areas=[focus_area],
         samples_per_area=sample_count,
+        custom_samples=custom_samples,
         **kwargs
     )
 
@@ -712,6 +774,59 @@ class LockInEvaluator:
             limit=sample_count,
             log_dir=self.log_dir
         )
+        self.results.extend(results)
+        return results
+    
+    async def run_with_scenario_data(
+        self,
+        scenario_data: Dict[str, Any],
+        focus_area: FocusArea,
+        judge_model: str = "openai/gpt-4o",
+        **kwargs
+    ) -> List[Dict[str, Any]]:
+        """
+        Run evaluation with custom scenario data from JSON.
+        
+        Args:
+            scenario_data: Scenario data dict from phase1_scenarios_flat.json
+            focus_area: Focus area to evaluate
+            judge_model: Judge model to use
+            **kwargs: Additional configuration
+            
+        Returns:
+            Evaluation results
+        """
+        # Create a sample with the scenario data in metadata
+        from inspect_ai.dataset import Sample
+        
+        sample = Sample(
+            input=scenario_data.get('id', 'unknown'),
+            target=focus_area.value,
+            metadata={
+                **scenario_data,  # Include all scenario data
+                "focus_area": focus_area.value,
+                "judge_model": judge_model,
+                "scenario_config": {}
+            }
+        )
+        
+        # Create task with this single sample
+        task = single_focus_task(
+            focus_area=focus_area,
+            sample_count=1,
+            judge_model=judge_model,
+            custom_samples=[sample],  # Pass custom sample
+            **kwargs
+        )
+        
+        from run_evaluation import run_eval
+        results = await run_eval(
+            task,
+            model=self.model,
+            limit=1,
+            log_dir=self.log_dir
+        )
+        
         self.results.extend(results)
         return results
     

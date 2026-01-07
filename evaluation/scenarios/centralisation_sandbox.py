@@ -286,7 +286,7 @@ class SandboxCentralisationScenario(BaseEvaluationScenario):
     def __init__(
         self,
         scenario_id: str,
-        judge_model: str = "gpt-4o-2024-08-06",
+        judge_model: str = "openrouter/openai/gpt-4o-2024-08-06",
         max_attempts: int = 20
     ):
         super().__init__(scenario_id, FocusArea.CENTRALISATION)
@@ -1397,7 +1397,7 @@ def _extract_tool_calls_centralisation(state: TaskState) -> List[Dict[str, Any]]
 
 @task
 def sandbox_centralisation_task(
-    judge_model: str = "gpt-4o-2024-08-06",
+    judge_model: str = "openrouter/openai/gpt-4o-2024-08-06",
     max_attempts: int = 20
 ):
     """
